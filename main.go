@@ -13,7 +13,6 @@ import (
 var ComputerList []Computer
 
 func main() {
-
 	// Start Processing Shell Arguments or use Default Values defined in const.go
 	httpPort, computerFilePath := processShellArgs()
 
@@ -35,6 +34,12 @@ func main() {
 	// Define Wakeup Api functions with a Computer Name
 	router.HandleFunc("/api/wakeup/computer/{computerName}", restWakeUpWithComputerName).Methods("GET")
 	router.HandleFunc("/api/wakeup/computer/{computerName}/", restWakeUpWithComputerName).Methods("GET")
+
+	// Define route for adding a new computer
+	router.HandleFunc("/api/add/computer", restAddComputer).Methods("POST")
+
+	// Define route for deleting a computer
+	router.HandleFunc("/api/delete/computer/{computerName}", restDeleteComputer).Methods("DELETE")
 
 	// Setup Webserver
 	httpListen := fmt.Sprint(":", httpPort)

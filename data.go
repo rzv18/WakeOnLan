@@ -7,9 +7,8 @@ import (
 	"github.com/gocarina/gocsv"
 )
 
-// LoadComputerList loads the Computer and return the readed list or an error
+// LoadComputerList loads the Computer and returns the read list or an error
 func loadComputerList(computerCsvFilePath string) ([]Computer, error) {
-
 	var computers []Computer
 
 	computerCsvFilePointer, computerCsvFileOpenError := os.Open(computerCsvFilePath)
@@ -25,6 +24,17 @@ func loadComputerList(computerCsvFilePath string) ([]Computer, error) {
 
 	computerCsvFilePointer.Close()
 	return computers, nil
+}
+
+// SaveComputerList saves the computer list to a CSV file
+func saveComputerList(computerCsvFilePath string, computers []Computer) error {
+	file, err := os.OpenFile(computerCsvFilePath, os.O_RDWR|os.O_CREATE|os.O_TRUNC, 0600)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	return gocsv.MarshalFile(&computers, file)
 }
 
 // Test if Path is a File and it exists
