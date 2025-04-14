@@ -1,7 +1,7 @@
 
 services:
   # Numele serviciului este 'wakeOnLan'
-  wakeOnLan: 
+  wake-on-lan: 
     # Proprietățile serviciului 'wakeOnLan' încep indentate pe linia următoare
     build:
       context: . 
