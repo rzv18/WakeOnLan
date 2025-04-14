@@ -1,10 +1,11 @@
 FROM golang:alpine3.16 AS builder
 
 RUN mkdir /app
-ADD . /app/
+#ADD . /app/
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y git --no-install-recommends && rm -rf /var/lib/apt/lists/*
+# Instalează git folosind apk (dacă nu e deja în imaginea de bază)
+RUN apk update && apk add --no-cache git
 
 RUN git clone https://github.com/rzv18/WakeOnLan.git .
 

@@ -1,6 +1,9 @@
-version: '3'
+
 services:
-  my-app: wakeOnLan
+  # Numele serviciului este 'wakeOnLan'
+  wakeOnLan: 
+    # Proprietățile serviciului 'wakeOnLan' încep indentate pe linia următoare
     build:
-      context: . # Directorul curent (unde se află Dockerfile și docker-compose.yml)
-    container_name: wakeOnLan_container # Nume opțional pentru container
+      context: . 
+      dockerfile: Dockerfile 
+    container_name: wake_on_lan_container # Poți păstra un nume de container specific
