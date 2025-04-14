@@ -1,11 +1,12 @@
 FROM golang:alpine3.16 AS builder
 
-LABEL org.label-schema.vcs-url="https://github.com/daBONDi/go-rest-wol" \
-      org.label-schema.url="https://github.com/daBONDi/go-rest-wol/blob/master/README.md"
-
 RUN mkdir /app
 ADD . /app/
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y git --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+RUN git clone https://github.com/rzv18/WakeOnLan.git .
 
 # Install Dependencies
 RUN apk update && apk upgrade && \
